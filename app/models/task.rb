@@ -10,8 +10,7 @@ class Task < ActiveRecord::Base
 
   attr_accessible :name, :description, :project_id, :run_at, :stop_at, :status
 
-  validates :name, :uniqueness => true, :presence => true
-  validates :project_id, :presence => true
+  validates_presence_of :name, :project_id
 
   scope :for_user, lambda{ |user|
     where("tasks.project_id IN (SELECT projects.id FROM projects WHERE projects.user_id = ?)", user.id)

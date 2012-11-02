@@ -11,6 +11,5 @@ class User < ActiveRecord::Base
   attr_accessible :login, :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :role_id
   # attr_accessible :title, :body
 
-  validates_presence_of :login
-  validates_uniqueness_of :login
+  validates :login, :uniqueness => true, :presence => true
 end
