@@ -1,14 +1,17 @@
 <p id="notice"><%= notice %></p>
 <h2><%= @project.name %></h2>
 <div><%= @project.description %></div>
-<br />
+<% if can? :edit, @project %>
+  <%= link_to 'Edit', edit_project_path(@project) %>
+<% end %>
+<br /><br />
 
 <% if !@project.tasks.empty? && (can? :manage_tasks, @project) %>
+  <h3>Tasks</h3>
   <%= render :partial => 'tasks/list', :locals => { :tasks => @project.tasks } %>
 <% end %>
 
-<% if can? :edit, @project %>
-  <%= link_to 'New Task', new_project_task_path(@project) %>
-  <%= link_to 'Edit', edit_project_path(@project) %> |
+<% if can? :manage_tasks, @project %>
+  <%= link_to 'New Task', new_project_task_path(@project) %> |
 <% end %>
 <%= link_to 'Back', projects_path %>
