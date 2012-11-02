@@ -2,7 +2,13 @@
 <h2><%= @project.name %></h2>
 <div><%= @project.description %></div>
 <br />
+
+<% if !@project.tasks.empty? && (can? :manage_tasks, @project) %>
+  <%= render :partial => 'tasks/list', :locals => { :tasks => @project.tasks } %>
+<% end %>
+
 <% if can? :edit, @project %>
+  <%= link_to 'New Task', new_project_task_path(@project) %>
   <%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
 <%= link_to 'Back', projects_path %>

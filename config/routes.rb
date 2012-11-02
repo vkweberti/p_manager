@@ -1,6 +1,12 @@
 PManager::Application.routes.draw do
 
-  resources :projects
+  resources :projects do
+    resources :tasks, :except => :index do
+      get "start" => "tasks#start"
+      get "stop" => "tasks#stop"
+      get "close" => "tasks#close"
+    end
+  end
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 

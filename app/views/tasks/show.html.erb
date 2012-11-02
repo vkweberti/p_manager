@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<div class="task_content">
+  <%= render :partial => 'task', :locals => { :project => @project, :task => @task } %>
+</div>
+
+<%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
+<%= link_to 'Back', project_path(@project) %>

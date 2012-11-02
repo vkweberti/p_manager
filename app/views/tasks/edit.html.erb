@@ -1,0 +1,6 @@
+<h1>Editing task</h1>
+
+<%= render :partial => 'form', :locals => { :url => project_task_path(@project, @task) } %>
+
+<%= link_to 'Show', project_task_path(@project, @task) %> |
+<%= link_to 'Back', project_path(@project) %>

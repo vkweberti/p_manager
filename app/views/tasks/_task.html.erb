@@ -1,0 +1,26 @@
+<h2><%= task.name %></h2>
+<div><%= task.description %></div>
+
+<table class="task">
+  <tr>
+    <th>Start at</th>
+    <th>Stop at</th>
+    <th>Total time(hh:mm)</th>
+  </tr>
+  <tr>
+    <td class="start"><%= task.run_at ? (l task.run_at, :format => :default) : '--' %></td>
+    <td class="stop"><%= task.stop_at ? (l task.stop_at, :format => :default) : '--' %></td>
+    <td class="total"><%= total_time task %></td>
+  </tr>
+</table>
+
+<div>
+  <% if can? :start, task %>
+    <%= link_to 'Start', project_task_start_path(project, task), :remote => true %>
+  <% elsif can? :stop, task %>
+    <%= link_to 'Stop', project_task_stop_path(project, task), :remote => true %>
+  <% end %>
+  <% unless task.closed? %>
+  | <%= link_to 'Close', project_task_close_path(project, task), :remote => true %>
+  <% end %>
+</div>

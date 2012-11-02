@@ -1,0 +1,2 @@
+var task_html = "<%= escape_javascript(render :partial => 'task', :locals => { :project => @project, :task => @task }) %>"
+$(".task_content").html(task_html);

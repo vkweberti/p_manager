@@ -11,8 +11,16 @@ class Ability
     if user.role.name == "user"
       #Project
       can [:index, :show, :new, :create], Project
-      can [:edit, :update, :destroy], Project do |project|
+      can [:edit, :update, :destroy, :manage_tasks], Project do |project|
         project.user_id == user.id
+      end
+
+      #Task
+      can :start, Task do |task|
+        !task.started? && !task.closed? && task.project.user_id == user.id
+      end
+      can :stop, Task do |task|
+        task.started? && !task.closed? && task.project.user_id == user.id
       end
     end
 
